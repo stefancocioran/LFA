@@ -1,0 +1,46 @@
+331CA Cocioran Stefan - Tema LFA
+
+                            - accessible -
+    Tranzitiile de stari date ca input sunt trecute intr-o matrice
+(stateTransitions). Pentru a afla starile accesibile, adica toate
+starile in care putem ajunge pornind de la starile de start (s stari),
+am facut BFS pornind de la aceste s stari.
+
+                            - productive -
+    Intrucat avem de-a face cu un graf orientat(avem n linii cu cate m
+numere, unde al q-lea numar de pe linia i reprezinta starea destinatie
+pentru tranzitia din starea i pe simbolul q), pentru a afla starile
+productive am creat o lista de adiacenta (reversedTransitions-am procedat
+invers fata de cum am facut la starile accesibile). In lista cu indicele i
+sunt retinute starile din care putem pleca pentru a ajunge in starea i.
+Pentru a afla aceste stari productive, adica starile din care se pleaca
+pentru a ajunge intr-o stare finala, am facut BFS pornind de la starile
+finale, f stari, date ca input.
+
+                              - useful -
+    Starile utile sunt atat accesibile, cat si productive. Pentru a le gasi,
+am aflat mai intai multimea starilor accesibile apoi multimea starilor
+productive si am facut intersectia acestora.
+
+                            - synchronized -
+    Pentru a afla cuvantul de sincronizare, m-am folosit de algoritmul
+gasit in Referinte[2] (Algorithm 2, Theorem 1.14, 1.15). Trebuiesc alese
+doua stari diferite, le-am ales pe primele doua, se formeaza o stare noua
+(s,t) si se afla merging sequence-ul folosind DFS. Cand se ajunge intr-o
+stare de forma (s1, s2), unde s1 = s2, algoritmul DFS se va opri.
+Dupa aceea, toate starile vor efectua tranzitii pe secventa gasita,
+pe care o vom adauga la solutia finala, si starile rezultate vor forma
+noua multime de stari disponibile. Atunci cand ramane doar o stare disponibila,
+algoritmul se va opri si cuvantul de sincronizare al automatului va fi aflat.
+
+                              - labyrinth -
+    Fiecare celula/camera din labirint am numerotat-o incepand de la 0 la
+l*c-1 si reprezinta cate o stare. Starile initiale/finale vor corespunde
+celulei/starii line*c + col, unde (line, col) reprezinta o pereche de
+numere data ca input pentru coordonatele robotilor/iesirilor. Intrucat
+robotii se pot deplasa doar in patru directii, vom avea tranzitii doar
+pe patru simboluri(0,1,2,3/est,nord,vest,sud). Deci vom avea o l*c stari
+cu cate 4 tranzitii. Pentru codificarea peretilor am transformat din
+decimal in binar, daca pentru o anumita directie aveam valoarea 1
+inseamna ca starea s pe simbolul directiei va cicla in ea insasi, iar
+daca este zero va trece in urmatoarea stare (se va muta la o celula vecina).
